@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SortVision - Sorting Algorithm Visualizer & Analyzer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>SortVision 📊</h1>
+        <p>An Interactive Sorting Algorithm Visualizer + Performance Analyzer</p>
+    </header>
+
+    <main class="container">
+        <div class="panel controls-panel">
+            <h2>Controls</h2>
+            <div class="control-group">
+                <label for="algorithm-select">Algorithm:</label>
+                <select id="algorithm-select"></select>
+            </div>
+            <div class="control-group">
+                <label for="array-size">Array Size: <span id="array-size-value">50</span></label>
+                <input type="range" id="array-size" min="10" max="200" value="50">
+            </div>
+             <div class="control-group">
+                <label for="animation-speed">Animation Speed: <span id="animation-speed-value">50</span></label>
+                <input type="range" id="animation-speed" min="1" max="100" value="50">
+            </div>
+            <div class="control-group button-group">
+                <button id="generate-random">Random</button>
+                <button id="generate-sorted">Sorted</button>
+                <button id="generate-reverse">Reverse</button>
+                <button id="generate-nearly-sorted">Nearly Sorted</button>
+            </div>
+             <div class="control-group">
+                <label for="upload-csv">Upload CSV:</label>
+                <input type="file" id="upload-csv" accept=".csv">
+            </div>
+        </div>
+
+        <div class="panel visualizer-panel">
+            <div class="visualizer-header">
+                 <div class="stats">
+                    <p>Comparisons: <span id="comparisons-count">0</span></p>
+                    <p>Swaps/Moves: <span id="swaps-count">0</span></p>
+                </div>
+                <div class="playback-controls">
+                    <button id="start-btn">Start</button>
+                    <button id="pause-btn" disabled>Pause</button>
+                    <button id="step-btn">Step</button>
+                    <button id="reset-btn">Reset</button>
+                </div>
+            </div>
+            <canvas id="visualizer-canvas"></canvas>
+        </div>
+
+        <div class="panel analyzer-panel">
+            <div class="tabs">
+                <button class="tab-link active" data-tab="analyzer">Analyzer</button>
+                <button class="tab-link" data-tab="theory">Theory</button>
+            </div>
+
+            <div id="analyzer" class="tab-content active">
+                <h2>Performance Analyzer</h2>
+                <div class="control-group">
+                    <label>Select algorithms to benchmark:</label>
+                    <div id="benchmark-algo-checklist"></div>
+                </div>
+                <div class="control-group">
+                    <label for="benchmark-sizes">Input Sizes (comma-separated):</label>
+                    <input type="text" id="benchmark-sizes" value="100, 1000, 5000">
+                </div>
+                <div class="control-group">
+                    <label for="benchmark-data-type">Dataset Type:</label>
+                    <select id="benchmark-data-type">
+                        <option value="random">Random</option>
+                        <option value="sorted">Sorted</option>
+                        <option value="reverse">Reverse</option>
+                        <option value="nearly-sorted">Nearly Sorted</option>
+                    </select>
+                </div>
+                <button id="run-benchmark-btn">Run Server-Side Benchmark</button>
+                <div id="benchmark-results">
+                    <div id="chart-container"><canvas id="time-chart"></canvas></div>
+                    <div id="table-container"></div>
+                    <button id="download-csv-btn" style="display:none;">Download Results as CSV</button>
+                </div>
+            </div>
+
+            <div id="theory" class="tab-content">
+                <h2 id="theory-title">Algorithm Theory</h2>
+                <div id="theory-content">
+                    <p>Select an algorithm from the controls panel to see its details.</p>
+                    <table class="complexity-table">
+                        <thead><tr><th colspan="2">Time Complexity</th></tr></thead>
+                        <tbody>
+                            <tr><td>Best Case</td><td id="time-best">--</td></tr>
+                            <tr><td>Average Case</td><td id="time-avg">--</td></tr>
+                            <tr><td>Worst Case</td><td id="time-worst">--</td></tr>
+                        </tbody>
+                    </table>
+                    <table class="complexity-table">
+                         <thead><tr><th>Space Complexity</th></tr></thead>
+                         <tbody><tr><td id="space-worst">--</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>
