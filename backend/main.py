@@ -1,6 +1,3 @@
-# backend/main.py
-# Main FastAPI application for serving the frontend and handling API requests.
-
 import time
 import io
 import pandas as pd
